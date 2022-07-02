@@ -1,0 +1,18 @@
+<p>list works!</p>
+<ng-container>
+  <paginator
+    [currentPage]="1"
+    [rowsPerPageOptions]="[10, 20, 40, 80]"
+    [rows]="10"
+    [totalRecords]="totalRecords"
+    (onPageChange)="onPageChanged($event)"
+  ></paginator>
+  <input
+    type="text"
+    class="w-2/4 p-2 rounded border border-gray-600"
+    placeholder="Filter by pokemon name..."
+    [formControl]="query"
+  />
+  <data-table [isLoading]="isLoading" [data]="pokemons" (elementChange)="changePokemon($event)"></data-table>
+</ng-container>
+
