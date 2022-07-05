@@ -1,3 +1,7 @@
 <p>pokemon works!</p>
-<app-list (pokemonChanged)="changePokemonInList($event)"></app-list>
-<app-detail [pokemon] = "pokemon" (pokemonChanged)="change($event)"></app-detail>
+<ng-container *ngIf="pokemons$ | async as pokemons">
+  <app-list [pokemons]="pokemons" (pokemonChanged)="changePokemonInList($event)" ></app-list>
+</ng-container>
+<ng-container *ngIf="pokemon$ | async as pokemon" >
+  <app-detail [pokemon] = "pokemon" (pokemonChanged)="change($event)"></app-detail>
+</ng-container>

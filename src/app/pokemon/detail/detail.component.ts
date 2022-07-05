@@ -8,7 +8,7 @@ import {Pokemon} from "../../models/pokemon";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DetailComponent implements OnInit {
-  @Input() pokemon: Pokemon = {"name": "1", "url" : "url", "id": "id1"} as Pokemon;
+  @Input() pokemon!: Pokemon;
   @Output() pokemonChanged = new EventEmitter<Pokemon>();
 
   constructor() { }

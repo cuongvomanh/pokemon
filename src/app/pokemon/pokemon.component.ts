@@ -1,5 +1,7 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {Pokemon} from "../models/pokemon";
+import {PokemonStore} from "./pokemon.store";
+import {first, map, Observable} from "rxjs";
 
 @Component({
   selector: 'app-pokemon',
@@ -8,10 +10,12 @@ import {Pokemon} from "../models/pokemon";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PokemonComponent implements OnInit {
-  pokemon: Pokemon;
+  pokemons$: Observable<Pokemon[]>;
+  pokemon$: Observable<Pokemon | undefined>;
 
-  constructor() {
-    this.pokemon = {"name": "1", "url": "url", "id": "id1"} as Pokemon;
+  constructor(private store: PokemonStore) {
+    this.pokemons$ = store.pokemons$;
+    this.pokemon$ = store.pokemon$;
   }
 
 
@@ -19,10 +23,9 @@ export class PokemonComponent implements OnInit {
   }
 
   change(pokemon: Pokemon) {
-    this.pokemon = pokemon;
   }
 
   changePokemonInList(pokemon: Pokemon) {
-    this.pokemon = pokemon;
+    this.store.updateCurrPokemonEffect(pokemon);
   }
 }
